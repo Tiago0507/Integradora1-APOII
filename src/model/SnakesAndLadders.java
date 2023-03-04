@@ -1,5 +1,7 @@
 package model;
 
-public class Controller {
+public class SnakesAndLadders {
+
+    private Board board;
     
 }

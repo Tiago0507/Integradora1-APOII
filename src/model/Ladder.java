@@ -1,5 +1,5 @@
 package model;
 
-public class Ladder {
+public class Ladder extends SpecialBox{
     
 }
