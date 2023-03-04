@@ -2,16 +2,23 @@ package model;
 
 public class Box {
 
+    private int number;
     private Box next;
     private Box previous;
     private Snake snake;
     private Ladder ladder;
     private Player player;
+
+    //Constructor
+    public Box(int number){
+        this.number = number;
+    }
     
 
     //----------Getters and setters----------
 
 
+    //
     public Snake getSnake() {
         return snake;
     }
@@ -42,7 +49,11 @@ public class Box {
     public void setPrevious(Box previous){
         this.previous = previous;
     }
-
-    
+    public int getNumber() {
+        return number;
+    }
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
 }

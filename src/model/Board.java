@@ -4,10 +4,15 @@ public class Board {
     
     private Box head;
 
+    //Constructor
+    public Board(){
+
+    }
+
     
     //-----Getters and setters-----
 
-    
+
     public Box getHead() {
         return head;
     }

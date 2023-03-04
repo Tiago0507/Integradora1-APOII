@@ -6,6 +6,11 @@ public abstract class SpecialBox {
     protected Box tail;
     protected String identifier;
 
+    //Constructor
+    public SpecialBox(String identifier){
+        this.identifier = identifier;
+    }
+
 
     //-----Getters and Setters-----
 

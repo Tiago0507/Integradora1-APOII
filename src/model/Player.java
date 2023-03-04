@@ -6,7 +6,12 @@ public class Player {
     private Player next;
     private double score;
 
+    //Constructor
+    public Player(String name){
+        this.name = name;
+    }
 
+    
     //-----Getters and setters-----
 
     
