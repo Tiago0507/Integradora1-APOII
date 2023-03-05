@@ -7,7 +7,7 @@ public class Box {
     private Box previous;
     private Snake snake;
     private Ladder ladder;
-    private Player player;
+    private PlayersList playersList;
 
     //Constructor
     public Box(int number){
@@ -31,11 +31,11 @@ public class Box {
     public void setLadder(Ladder ladder) {
         this.ladder = ladder;
     }
-    public Player getPlayer() {
-        return player;
+    public PlayersList getPlayerList() {
+        return playersList;
     }
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayerList(PlayersList playersList) {
+        this.playersList = playersList;
     }
     public Box getNext(){
         return next;
