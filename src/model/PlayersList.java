@@ -21,6 +21,30 @@ public class PlayersList {
         add(current.getNext(), player);
     }
 
+    public void removePlayer(Player player){
+        removePlayer(player, head);
+    }
+    private void removePlayer(Player player, Player current){
+        if (current.getNext() == null) return;
+        if (player == head){
+            if(player.getNext() == null){
+                head = null;
+            } else {
+                head = player.getNext();
+            }
+            return;
+        }
+        if (current.getNext() == player){
+            if(player.getNext() == null){
+                current.setNext(null);
+            } else {
+                current.setNext(player.getNext());
+            }
+        } else {
+            removePlayer(player, current.getNext());
+        }
+    }
+
 
     //-----Getters and setters-----
 
