@@ -39,6 +39,20 @@ public class PointTree {
         }
     }
 
+    //In order from highest to lowest
+    public String inOrder(){
+        return inOrder(root);
+    }
+    private String inOrder(Player current){
+        String msj = "";
+        if(current == null){
+            return msj;
+        }
+        msj += inOrder(current.getRight());
+        msj += ("Nombre: " + current.getName() + ", Puntaje: " + current.getScore() + "\n");
+        msj += inOrder(current.getLeft());
+        return msj;
+    }
 
     
     //-----Getters and setters-----
