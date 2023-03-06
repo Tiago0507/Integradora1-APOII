@@ -32,6 +32,27 @@ public class Board {
         initBoard(size, current.getNext(),number + 1);
     }
 
+    // Print 
+
+    public void print(){
+        if(head == null){
+            System.out.println("Lista vacia");
+        }else{
+            print(head);
+        }
+    }
+
+    private void print(Box current){
+        if(current.getNext() == null){
+            System.out.println(current.getNumber());
+        }else{
+            System.out.print(current.getNumber() + ", ");
+            print(current.getNext());
+        }
+
+    }
+
+
     //-----Getters and setters-----
 
 

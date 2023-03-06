@@ -48,11 +48,14 @@ public class Main {
         return option; 
     }
 
-    public void executeOption(int option){
-        int turn;
+    public void executeOption(int option){;
         switch(option) {
             case 1 :
-                return (game.getBoard() != null)?game.play():game.initializeBoard();
+                if(game.getBoard() != null){
+                    game.play();
+                }else{
+                    uiInitializeBoard();
+                }
                 break;
             case 0: 
                 
@@ -82,6 +85,14 @@ public class Main {
         return option; 
     }
 
+    public void uiInitializeBoard(){
+        System.out.print("Rows: ");
+        int rows = reader.nextInt();
+        System.out.print("Columns: ");
+        int columns = reader.nextInt();
+        game.initializeBoard(rows, columns);
+
+    }
 
     public void cleanConsole(){
         System.out.print("\033[H\033[2J");
