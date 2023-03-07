@@ -2,7 +2,7 @@ package model;
 
 public class PointTree {
 
-    private Player root;
+    private TreePlayerNode root;
 
     //Constructor
     public PointTree(){
@@ -11,22 +11,22 @@ public class PointTree {
 
     //Binary search tree methods
 
-    public void add(Player player){
+    public void add(TreePlayerNode player){
         if(root == null){
             root = player;
         }else{
             add(root, player);
         }
     }
-    private void add(Player current, Player player){
-        if(player.getScore() < current.getScore()){
+    private void add(TreePlayerNode current, TreePlayerNode player){
+        if(player.getPlayer().getScore() < current.getPlayer().getScore()){
           //Meter a la izquierda
             if(current.getLeft() == null){
                 current.setLeft(player);
             }else{
                 add(current.getLeft(), player);
             }
-        }else if(player.getScore() > current.getScore()){
+        }else if(player.getPlayer().getScore() > current.getPlayer().getScore()){
             //Meter a la derecha
             if(current.getRight() == null){
                 current.setRight(player);
@@ -43,13 +43,13 @@ public class PointTree {
     public String inOrder(){
         return inOrder(root);
     }
-    private String inOrder(Player current){
+    private String inOrder(TreePlayerNode current){
         String msj = "";
         if(current == null){
             return msj;
         }
         msj += inOrder(current.getRight());
-        msj += ("Nombre: " + current.getName() + ", Puntaje: " + current.getScore() + "\n");
+        msj += ("Nombre: " + current.getPlayer().getName() + ", Puntaje: " + current.getPlayer().getScore() + "\n");
         msj += inOrder(current.getLeft());
         return msj;
     }
@@ -58,11 +58,11 @@ public class PointTree {
     //-----Getters and setters-----
 
 
-    public Player getRoot() {
+    public TreePlayerNode getRoot() {
         return root;
     }
 
-    public void setRoot(Player root) {
+    public void setRoot(TreePlayerNode root) {
         this.root = root;
     }
 

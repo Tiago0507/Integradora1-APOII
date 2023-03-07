@@ -2,18 +2,18 @@ package model;
 
 public class PlayersList {
 
-    private Player head;
+    private LinkedListPlayerNode head;
 
     //Methods
 
-    public void add(Player player){
+    public void add(LinkedListPlayerNode player){
         if(head == null){
             head = player;
         }else{
             add(head, player);
         }
     }
-    private void add(Player current, Player player){
+    private void add(LinkedListPlayerNode current, LinkedListPlayerNode player){
         if(current.getNext() == null){
             current.setNext(player);
             return;
@@ -21,12 +21,12 @@ public class PlayersList {
         add(current.getNext(), player);
     }
 
-    public void removePlayer(Player player){
+    public void removePlayer(LinkedListPlayerNode player){
         removePlayer(player, head);
     }
-    private void removePlayer(Player player, Player current){
+    private void removePlayer(LinkedListPlayerNode player, LinkedListPlayerNode current){
         if (current.getNext() == null) return;
-        if (player == head){
+        if (player  == head){
             if(player.getNext() == null){
                 head = null;
             } else {
@@ -49,10 +49,10 @@ public class PlayersList {
     //-----Getters and setters-----
 
 
-    public Player getHead() {
+    public LinkedListPlayerNode getHead() {
         return head;
     }
-    public void setHead(Player head) {
+    public void setHead(LinkedListPlayerNode head) {
         this.head = head;
     }
 

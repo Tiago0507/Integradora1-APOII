@@ -5,8 +5,12 @@ public class Box {
     private int number;
     private Box next;
     private Box previous;
-    private Snake snake;
-    private Ladder ladder;
+
+    private Box tailSnake;
+    private Box headLadder;
+    private String identifier;
+    private int itemClassifier; // 0 - nothing | 1 - snake | 2-Ladder
+
     private PlayersList playersList;
 
     //Constructor
@@ -17,45 +21,71 @@ public class Box {
 
     //----------Getters and setters----------
 
+    public String toString(){
+        return "[" + this.number + "]";
+    }
 
-    //
-    public Snake getSnake() {
-        return snake;
-    }
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-    public Ladder getLadder() {
-        return ladder;
-    }
-    public void setLadder(Ladder ladder) {
-        this.ladder = ladder;
-    }
-    public PlayersList getPlayerList() {
-        return playersList;
-    }
-    public void setPlayerList(PlayersList playersList) {
-        this.playersList = playersList;
-    }
-    public Box getNext(){
-        return next;
-    }
-    public void setNext(Box next){
-        this.next = next;
-    }
-    public Box getPrevious(){
-        return previous;
-    }
-    public void setPrevious(Box previous){
-        this.previous = previous;
-    }
     public int getNumber() {
         return number;
     }
+
     public void setNumber(int number) {
         this.number = number;
     }
-    public String toString(){
-        return "[" + this.number + "]";
+
+    public Box getNext() {
+        return next;
+    }
+
+    public void setNext(Box next) {
+        this.next = next;
+    }
+
+    public Box getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Box previous) {
+        this.previous = previous;
+    }
+
+    public Box getTailSnake() {
+        return tailSnake;
+    }
+
+    public void setTailSnake(Box tailSnake) {
+        this.tailSnake = tailSnake;
+    }
+
+    public Box getHeadLadder() {
+        return headLadder;
+    }
+
+    public void setHeadLadder(Box headLadder) {
+        this.headLadder = headLadder;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public int getItemClassifier() {
+        return itemClassifier;
+    }
+
+    public void setItemClassifier(int itemClassifier) {
+        this.itemClassifier = itemClassifier;
+    }
+
+    public PlayersList getPlayersList() {
+        return playersList;
+    }
+
+    public void setPlayersList(PlayersList playersList) {
+        this.playersList = playersList;
     }
 }
