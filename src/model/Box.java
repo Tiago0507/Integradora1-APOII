@@ -5,7 +5,6 @@ public class Box {
     private int number;
     private Box next;
     private Box previous;
-
     private Box tailSnake;
     private Box headLadder;
     private String identifier;
@@ -15,14 +14,27 @@ public class Box {
 
     //Constructor
     public Box(int number){
+        this.playersList = new PlayersList();
         this.number = number;
     }
     
 
     //----------Getters and setters----------
 
-    public String toString(){
-        return "[" + this.number + "]";
+    public String toString()
+    {
+        String players = getStringPlayers(playersList.getHead());
+        return "[" + this.number +  " " + players + "]";
+    }
+
+
+    private String getStringPlayers(LinkedListPlayerNode player){
+        if(player != null){
+            return  getStringPlayers(player.getNext()) +  player.getPlayer().getName() + " ";
+        }else{
+            return "";
+        }
+
     }
 
     public int getNumber() {

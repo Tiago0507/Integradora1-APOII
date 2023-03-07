@@ -4,7 +4,11 @@ import java.util.Scanner;
 import javax.naming.InitialContext;
 import javax.xml.transform.Source;
 
+import model.LinkedListPlayerNode;
+import model.Player;
+import model.PlayersList;
 import model.SnakesAndLadders;
+import org.w3c.dom.Node;
 
 public class Main {
     private Scanner reader;
@@ -52,6 +56,7 @@ public class Main {
     public void executeOption(int option){;
         switch(option) {
             case 1 :
+                uiChoosePlayers(1);
                 uiInitializeBoard();
                 break;
             case 0: 
@@ -88,7 +93,18 @@ public class Main {
         System.out.print("Columns: ");
         int columns = reader.nextInt();
         game.initializeBoard(rows, columns);
+    }
 
+    public void uiChoosePlayers(int countPlayer){
+        if(countPlayer <= game.NUMBER_OF_PLAYERS) {
+            System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
+            String name = reader.next();
+
+            game.getPlayerList().add(new LinkedListPlayerNode(new Player(name)));
+            uiChoosePlayers(countPlayer += 1);
+        }else{
+            return;
+        }
     }
 
     public void cleanConsole(){
