@@ -1,6 +1,7 @@
 package ui;
 import java.util.Scanner;
 
+import javax.naming.InitialContext;
 import javax.xml.transform.Source;
 
 import model.SnakesAndLadders;
@@ -51,11 +52,7 @@ public class Main {
     public void executeOption(int option){;
         switch(option) {
             case 1 :
-                if(game.getBoard() != null){
-                    game.play();
-                }else{
-                    uiInitializeBoard();
-                }
+                uiInitializeBoard();
                 break;
             case 0: 
                 

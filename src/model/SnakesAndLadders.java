@@ -16,7 +16,8 @@ public class SnakesAndLadders {
     }
 
     public void initializeBoard(int rows, int columns){
-        this.board = new Board(rows, columns);
+        
+       this.board = new Board(rows, columns);
         play();
     }
 
