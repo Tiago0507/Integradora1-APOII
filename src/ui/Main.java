@@ -1,14 +1,11 @@
 package ui;
 import java.util.Scanner;
 
-import javax.naming.InitialContext;
-import javax.xml.transform.Source;
 
 import model.LinkedListPlayerNode;
 import model.Player;
 import model.PlayersList;
 import model.SnakesAndLadders;
-import org.w3c.dom.Node;
 
 public class Main {
     private Scanner reader;
@@ -56,6 +53,7 @@ public class Main {
     public void executeOption(int option){;
         switch(option) {
             case 1 :
+                game.setPlayerList(new PlayersList());
                 uiChoosePlayers(1);
                 uiInitializeBoard();
                 break;

@@ -18,7 +18,7 @@ public class SnakesAndLadders {
         
        this.board = new Board(rows, columns);
        this.board.getHead().setPlayersList(playerList);
-        play();
+       play();
     }
 
     public Board getBoard(){
