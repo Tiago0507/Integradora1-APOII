@@ -87,6 +87,24 @@ public class Board {
         }
         return boxito;
     }
+
+    //Print snakes and ladders
+
+    public void printSnakesAndLadders(){
+
+    }
+
+
+    //Get box by number
+
+    public Box getBoxByNumber(int number){
+        return getBoxByNumber(number, head);
+    }
+    private Box getBoxByNumber(int number, Box current){
+        if(current.getNumber() == number) return current;
+        return getBoxByNumber(number, current.getNext());
+    }
+
     //-----Getters and setters-----
 
 
@@ -112,6 +130,10 @@ public class Board {
 
     public void setColumns(int columns) {
         this.columns = columns;
+    }
+
+    public int getBoxAmmount(){
+        return rows * columns;
     }
 
 

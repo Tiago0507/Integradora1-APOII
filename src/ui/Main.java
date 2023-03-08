@@ -12,7 +12,6 @@ public class Main {
     private SnakesAndLadders game;
 
     public Main() {
-		game = new SnakesAndLadders();
         reader = new Scanner(System.in);
 	}
     public static void main(String[] args) {
@@ -29,6 +28,7 @@ public class Main {
 
     public void menuController(int option){
         if(option != 0){
+            game = new SnakesAndLadders();
             option = getOptionShowMenu(); 
             cleanConsole();
 			executeOption(option);
@@ -54,8 +54,10 @@ public class Main {
         switch(option) {
             case 1 :
                 game.setPlayerList(new PlayersList());
-                uiChoosePlayers(1);
                 uiInitializeBoard();
+                uiChoosePlayers(1);
+                game.initTimer();
+                play();
                 break;
             case 0: 
                 
@@ -97,12 +99,32 @@ public class Main {
         if(countPlayer <= game.NUMBER_OF_PLAYERS) {
             System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
             String name = reader.next();
-
-            game.getPlayerList().add(new LinkedListPlayerNode(new Player(name)));
+            LinkedListPlayerNode controllerPlayer = new LinkedListPlayerNode(new Player(name));
+            LinkedListPlayerNode boxPlayer = new LinkedListPlayerNode(new Player(name));
+            game.addPlayer(controllerPlayer, boxPlayer);
             uiChoosePlayers(countPlayer += 1);
         }else{
             return;
         }
+    }
+
+    public void play(){
+        game.getBoard().print();
+        uiShowPlayerOptions();
+        int option = validateIntegerInput();
+        System.out.println(game.play(option));
+        if(game.getFinishGame()){
+            float score = (600 - game.getTimer()) / 6;
+            System.out.println("Tu puntaje a sido: " + score);
+            return;
+        }
+        play();
+    }
+
+    public void uiShowPlayerOptions(){
+        System.out.println("Jugador " + game.getCurrentPlayerName() + ", es tu turno.");
+        System.out.println("1. Tirar dado");
+        System.out.println("2. Ver escaleras y serpientes");
     }
 
     public void cleanConsole(){
