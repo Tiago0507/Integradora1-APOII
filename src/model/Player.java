@@ -4,13 +4,18 @@ public class Player {
 
     private String name;
     private double score;
-
+    private int position;
 
     //Constructor
     public Player(String name){
         this.name = name;
     }
 
+
+
+    //-----Getters and setters-----
+
+    
     public String getName() {
         return name;
     }
@@ -31,9 +36,13 @@ public class Player {
         return name; 
     }
 
+    public int getPosition() {
+        return position;
+    }
 
-    //-----Getters and setters-----
-
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
 
     
