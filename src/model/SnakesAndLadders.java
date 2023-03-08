@@ -9,7 +9,7 @@ public class SnakesAndLadders {
     private PointTree pointTree;
     public final int NUMBER_OF_PLAYERS = 3;
     private LinkedListPlayerNode currentPlayer;
-    private double timer;
+    private long timer;
     private boolean finishGame = false;
     
     //Constructor
@@ -29,7 +29,28 @@ public class SnakesAndLadders {
     private String throwDice(){
         String msj = "";
         int dice = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+        msj = "Has sacado " + dice;
+        int newPlayerPos = currentPlayer.getPlayer().getPosition() + dice;  
+        if(newPlayerPos >= board.getBoxAmmount()){
+            this.finishGame = true;
+            return msj = "Has llegado a la casilla final, has ganado.";
+        } 
+        movePlayerOnBoard(newPlayerPos);
         return msj;
+    }
+
+    private void movePlayerOnBoard(int newPlayerPos){
+        Box currentPlayerBox = getBoxByNumber(currentPlayer.getPlayer().getPosition());
+        Box newPlayerBox = getBoxByNumber(newPlayerPos);
+        LinkedListPlayerNode playerOnBox = currentPlayerBox.getPlayersList().searchPlayerByName(getCurrentPlayerName());
+        currentPlayerBox.getPlayersList().delete(getCurrentPlayerName());
+        newPlayerBox.getPlayersList().add(playerOnBox);
+        currentPlayer.getPlayer().setPosition(newPlayerPos);
+        currentPlayer = currentPlayer.getNext();
+    }
+
+    private Box getBoxByNumber(int number){
+        return board.getBoxByNumber(number);
     }
 
     private void printSnakesAndLadders(){
@@ -42,8 +63,7 @@ public class SnakesAndLadders {
     }
 
     public void initializeBoard(int rows, int columns){
-       this.board = new Board(rows, columns);
-       this.board.getHead().setPlayersList(playerList);
+            this.board = new Board(rows, columns);
     }
 
     public Board getBoard(){
@@ -62,9 +82,10 @@ public class SnakesAndLadders {
         this.pointTree = pointTree;
     }
 
-    public void addPlayer(LinkedListPlayerNode player){
-        if(currentPlayer == null) currentPlayer = player;
-        playerList.add(player);
+    public void addPlayer(LinkedListPlayerNode controllerPlayer, LinkedListPlayerNode boxPlayer){
+        if(currentPlayer == null) currentPlayer = controllerPlayer;
+        playerList.add(controllerPlayer);
+        board.getHead().getPlayersList().add(boxPlayer);
     }
 
     public PlayersList getPlayerList() {
@@ -73,6 +94,20 @@ public class SnakesAndLadders {
 
     public void setPlayerList(PlayersList playerList) {
         this.playerList = playerList;
+    }
+
+    public boolean getFinishGame(){
+        return this.finishGame;
+    }
+
+    public void initTimer(){
+        this.timer = System.currentTimeMillis();
+    }
+
+    public float getTimer(){
+        long endTime = System.currentTimeMillis();
+        float seconds = (endTime - timer) / 1000F;
+        return seconds;
     }
 
 

@@ -1,10 +1,19 @@
 package model;
 
-public class PlayersList {
+public class PlayersList{
 
     private LinkedListPlayerNode head;
 
     //Methods
+
+    public LinkedListPlayerNode searchPlayerByName(String name){
+        return searchPlayerByName(name, head);
+    }
+    private LinkedListPlayerNode searchPlayerByName(String name, LinkedListPlayerNode current){
+        if(current == null) return null;
+        if(current.getPlayer().getName().equals(name)) return current;
+        return searchPlayerByName(name, current.getNext());
+    }
 
     public void add(LinkedListPlayerNode player){
         if(head == null){
@@ -28,12 +37,21 @@ public class PlayersList {
     }
 
 
-    public void delete(LinkedListPlayerNode player, String goal){
+    public void delete(String goal){
+        delete(head, goal);
+    }
+    private void delete(LinkedListPlayerNode player, String goal){
+        if (player == null) return;
         if(player.getPlayer().getName().equals(goal)){
             if(player == head){
-                head.getPrevious().setNext(head.getNext());
-                head.getNext().setPrevious(head.getPrevious());
-                head = head.getNext();
+                if(head.getPrevious() == head && head.getNext() == head){
+                    head = null;
+                } else {
+                    head.getPrevious().setNext(head.getNext());
+                    head.getNext().setPrevious(head.getPrevious());
+                    head = head.getNext();
+                }
+
             }else{
                 LinkedListPlayerNode prev = player.getPrevious();
                 LinkedListPlayerNode next = player.getNext();

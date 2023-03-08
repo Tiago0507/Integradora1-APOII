@@ -4,7 +4,7 @@ public class Player {
 
     private String name;
     private double score;
-    private int position;
+    private int position = 1;
 
     //Constructor
     public Player(String name){

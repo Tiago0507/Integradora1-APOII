@@ -54,8 +54,9 @@ public class Main {
         switch(option) {
             case 1 :
                 game.setPlayerList(new PlayersList());
-                uiChoosePlayers(1);
                 uiInitializeBoard();
+                uiChoosePlayers(1);
+                game.initTimer();
                 play();
                 break;
             case 0: 
@@ -98,8 +99,9 @@ public class Main {
         if(countPlayer <= game.NUMBER_OF_PLAYERS) {
             System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
             String name = reader.next();
-
-            game.addPlayer(new LinkedListPlayerNode(new Player(name)));
+            LinkedListPlayerNode controllerPlayer = new LinkedListPlayerNode(new Player(name));
+            LinkedListPlayerNode boxPlayer = new LinkedListPlayerNode(new Player(name));
+            game.addPlayer(controllerPlayer, boxPlayer);
             uiChoosePlayers(countPlayer += 1);
         }else{
             return;
@@ -110,7 +112,11 @@ public class Main {
         game.getBoard().print();
         uiShowPlayerOptions();
         int option = validateIntegerInput();
-        game.play(option);
+        System.out.println(game.play(option));
+        if(game.getFinishGame()){
+            System.out.println("Tu puntaje a sido: " + game.getTimer());
+            return;
+        }
         play();
     }
 
