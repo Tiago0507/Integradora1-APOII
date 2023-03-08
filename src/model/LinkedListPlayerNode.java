@@ -3,6 +3,7 @@ package model;
 public class LinkedListPlayerNode{
     private Player player;
     private LinkedListPlayerNode next;
+    private LinkedListPlayerNode previous;
 
     public LinkedListPlayerNode(Player player) {
         this.player = player;
@@ -22,5 +23,13 @@ public class LinkedListPlayerNode{
 
     public void setNext(LinkedListPlayerNode next) {
         this.next = next;
+    }
+
+    public LinkedListPlayerNode getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(LinkedListPlayerNode previous) {
+        this.previous = previous;
     }
 }

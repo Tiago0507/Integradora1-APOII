@@ -9,42 +9,45 @@ public class PlayersList {
     public void add(LinkedListPlayerNode player){
         if(head == null){
             head = player;
+            head.setNext(head);
+            head.setPrevious(head);
         }else{
-            add(head, player);
-        }
-    }
-    private void add(LinkedListPlayerNode current, LinkedListPlayerNode player){
-        if(current.getNext() == null){
-            current.setNext(player);
-            return;
-        }
-        add(current.getNext(), player);
-    }
-
-    public void removePlayer(LinkedListPlayerNode player){
-        removePlayer(player, head);
-    }
-    private void removePlayer(LinkedListPlayerNode player, LinkedListPlayerNode current){
-        if (current.getNext() == null) return;
-        if (player  == head){
-            if(player.getNext() == null){
-                head = null;
-            } else {
-                head = player.getNext();
-            }
-            return;
-        }
-        if (current.getNext() == player){
-            if(player.getNext() == null){
-                current.setNext(null);
-            } else {
-                current.setNext(player.getNext());
-            }
-        } else {
-            removePlayer(player, current.getNext());
+            LinkedListPlayerNode tail = head.getPrevious();
+            player.setNext(head);
+            head.setPrevious(player);
+            tail.setNext(player);
+            player.setPrevious(tail);
         }
     }
 
+    public String print(LinkedListPlayerNode player){
+        if(player == head.getPrevious()){
+            return player.getPlayer().toString();
+        }
+        return print(player.getNext()) + " " + player.getPlayer().toString(); 
+    }
+
+
+    public void delete(LinkedListPlayerNode player, String goal){
+        if(player.getPlayer().getName().equals(goal)){
+            if(player == head){
+                head.getPrevious().setNext(head.getNext());
+                head.getNext().setPrevious(head.getPrevious());
+                head = head.getNext();
+            }else{
+                LinkedListPlayerNode prev = player.getPrevious();
+                LinkedListPlayerNode next = player.getNext();
+                prev.setNext(next);
+                next.setPrevious(prev);
+            }
+            return;
+        }
+        if(player.getNext() == head){
+            return;
+        }
+        delete(player.getNext(), goal);
+
+    }
 
     //-----Getters and setters-----
 

@@ -5,7 +5,7 @@ public class SnakesAndLadders {
     private Board board;
     private PlayersList playerList;
     private PointTree pointTree;
-    public int NUMBER_OF_PLAYERS = 3;
+    public final int NUMBER_OF_PLAYERS = 3;
     //Constructor
     public SnakesAndLadders(){
         playerList = new PlayersList();

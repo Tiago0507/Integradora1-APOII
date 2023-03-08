@@ -23,18 +23,13 @@ public class Box {
 
     public String toString()
     {
-        String players = getStringPlayers(playersList.getHead());
-        return "[" + this.number +  " " + players + "]";
-    }
-
-
-    private String getStringPlayers(LinkedListPlayerNode player){
-        if(player != null){
-            return  getStringPlayers(player.getNext()) +  player.getPlayer().getName() + " ";
-        }else{
-            return "";
+        String list = ""; 
+        if(playersList != null && playersList.getHead() != null){
+            list = playersList.print(playersList.getHead());
         }
-
+        
+        //String players = getStringPlayers(playersList.getHead());
+        return "[" + this.number + ((list != "")?" ":"") + list + "]";
     }
 
     public int getNumber() {
