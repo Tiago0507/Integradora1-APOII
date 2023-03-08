@@ -114,7 +114,8 @@ public class Main {
         int option = validateIntegerInput();
         System.out.println(game.play(option));
         if(game.getFinishGame()){
-            System.out.println("Tu puntaje a sido: " + game.getTimer());
+            float score = (600 - game.getTimer()) / 6;
+            System.out.println("Tu puntaje a sido: " + score);
             return;
         }
         play();
