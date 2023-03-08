@@ -1,5 +1,7 @@
 package model;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class SnakesAndLadders {
 
     private Board board;
@@ -8,6 +10,7 @@ public class SnakesAndLadders {
     public final int NUMBER_OF_PLAYERS = 3;
     private LinkedListPlayerNode currentPlayer;
     private double timer;
+    private boolean finishGame = false;
     
     //Constructor
     public SnakesAndLadders(){
@@ -25,6 +28,7 @@ public class SnakesAndLadders {
 
     private String throwDice(){
         String msj = "";
+        int dice = ThreadLocalRandom.current().nextInt(1, 6 + 1);
         return msj;
     }
 
