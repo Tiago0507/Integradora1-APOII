@@ -87,6 +87,12 @@ public class Board {
         }
         return boxito;
     }
+
+    public void printSnakesAndLadders(){
+        
+    }
+
+
     //-----Getters and setters-----
 
 

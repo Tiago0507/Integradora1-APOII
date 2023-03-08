@@ -6,19 +6,40 @@ public class SnakesAndLadders {
     private PlayersList playerList;
     private PointTree pointTree;
     public final int NUMBER_OF_PLAYERS = 3;
+    private LinkedListPlayerNode currentPlayer;
+    private double timer;
+    
     //Constructor
     public SnakesAndLadders(){
         playerList = new PlayersList();
     }
-    public void play(){
-        board.print();
+    public String play(int option){
+        String msj = "";
+        switch (option){
+            case 1 -> msj = throwDice();
+            case 2 -> printSnakesAndLadders();
+            default -> msj = "Opcion incorrecta.";
+        }
+        return msj;
+    }
+
+    private String throwDice(){
+        String msj = "";
+        return msj;
+    }
+
+    private void printSnakesAndLadders(){
+        board.printSnakesAndLadders();
+    }
+
+    public String getCurrentPlayerName(){
+        String name = currentPlayer.getPlayer().getName();
+        return name;
     }
 
     public void initializeBoard(int rows, int columns){
-        
        this.board = new Board(rows, columns);
        this.board.getHead().setPlayersList(playerList);
-       play();
     }
 
     public Board getBoard(){
@@ -37,7 +58,10 @@ public class SnakesAndLadders {
         this.pointTree = pointTree;
     }
 
-
+    public void addPlayer(LinkedListPlayerNode player){
+        if(currentPlayer == null) currentPlayer = player;
+        playerList.add(player);
+    }
 
     public PlayersList getPlayerList() {
         return playerList;

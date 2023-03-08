@@ -56,6 +56,7 @@ public class Main {
                 game.setPlayerList(new PlayersList());
                 uiChoosePlayers(1);
                 uiInitializeBoard();
+                play();
                 break;
             case 0: 
                 
@@ -98,11 +99,25 @@ public class Main {
             System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
             String name = reader.next();
 
-            game.getPlayerList().add(new LinkedListPlayerNode(new Player(name)));
+            game.addPlayer(new LinkedListPlayerNode(new Player(name)));
             uiChoosePlayers(countPlayer += 1);
         }else{
             return;
         }
+    }
+
+    public void play(){
+        game.getBoard().print();
+        uiShowPlayerOptions();
+        int option = validateIntegerInput();
+        game.play(option);
+        play();
+    }
+
+    public void uiShowPlayerOptions(){
+        System.out.println("Jugador " + game.getCurrentPlayerName() + ", es tu turno.");
+        System.out.println("1. Tirar dado");
+        System.out.println("2. Ver escaleras y serpientes");
     }
 
     public void cleanConsole(){
