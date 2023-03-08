@@ -12,7 +12,6 @@ public class Main {
     private SnakesAndLadders game;
 
     public Main() {
-		game = new SnakesAndLadders();
         reader = new Scanner(System.in);
 	}
     public static void main(String[] args) {
@@ -29,6 +28,7 @@ public class Main {
 
     public void menuController(int option){
         if(option != 0){
+            game = new SnakesAndLadders();
             option = getOptionShowMenu(); 
             cleanConsole();
 			executeOption(option);

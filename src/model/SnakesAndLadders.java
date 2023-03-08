@@ -31,10 +31,13 @@ public class SnakesAndLadders {
         int dice = ThreadLocalRandom.current().nextInt(1, 6 + 1);
         msj = "Has sacado " + dice;
         int newPlayerPos = currentPlayer.getPlayer().getPosition() + dice;  
-        if(newPlayerPos >= board.getBoxAmmount()){
+        if(newPlayerPos == board.getBoxAmmount()){
             this.finishGame = true;
             return msj = "Has llegado a la casilla final, has ganado.";
-        } 
+        }
+        if(newPlayerPos > board.getBoxAmmount()){
+            return msj += "\nDebes sacar " + (board.getBoxAmmount() - currentPlayer.getPlayer().getPosition() + " para poder ganar.");
+        }
         movePlayerOnBoard(newPlayerPos);
         return msj;
     }
