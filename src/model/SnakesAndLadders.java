@@ -36,7 +36,9 @@ public class SnakesAndLadders {
             return msj = "Has llegado a la casilla final, has ganado.";
         }
         if(newPlayerPos > board.getBoxAmmount()){
-            return msj += "\nDebes sacar " + (board.getBoxAmmount() - currentPlayer.getPlayer().getPosition() + " para poder ganar.");
+            msj += "\nDebes sacar " + (board.getBoxAmmount() - currentPlayer.getPlayer().getPosition() + " para poder ganar.");
+            currentPlayer = currentPlayer.getNext();
+            return msj;
         }
         movePlayerOnBoard(newPlayerPos);
         return msj;
