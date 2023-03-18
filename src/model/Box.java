@@ -81,14 +81,6 @@ public class Box {
         this.identifier = identifier;
     }
 
-    public int getItemClassifier() {
-        return itemClassifier;
-    }
-
-    public void setItemClassifier(int itemClassifier) {
-        this.itemClassifier = itemClassifier;
-    }
-
     public PlayersList getPlayersList() {
         return playersList;
     }

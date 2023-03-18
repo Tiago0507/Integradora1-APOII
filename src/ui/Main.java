@@ -88,11 +88,28 @@ public class Main {
     }
 
     public void uiInitializeBoard(){
-        System.out.print("Rows: ");
-        int rows = reader.nextInt();
-        System.out.print("Columns: ");
-        int columns = reader.nextInt();
-        game.initializeBoard(rows, columns, 5 ,5);
+        int rows;
+        int columns;
+        do {
+            System.out.println("Input the rows and columns (Minimum 4 each)");
+            System.out.print("Rows: ");
+            rows = reader.nextInt();
+            System.out.print("Columns: ");
+            columns = reader.nextInt();
+            if(rows < 4 || columns < 4) System.out.println("Wrong ammount of columns and/or rows.");
+        } while (rows < 4 || columns < 4);
+        int snakes;
+        int ladders;
+        int maxSnakesAndLadders = rows * columns/3;
+        do {
+            System.out.println("Input the snakes and ladders (The sum of the quantity must not exceed " + maxSnakesAndLadders +  ")");
+            System.out.print("Snakes: ");
+            snakes = reader.nextInt();
+            System.out.print("Ladders: ");
+            ladders = reader.nextInt();
+            if(snakes + ladders > maxSnakesAndLadders) System.out.println("Too much snakes and ladders, please try again.");
+        } while (snakes + ladders > maxSnakesAndLadders);
+        game.initializeBoard(rows, columns, snakes ,ladders);
     }
 
     public void uiChoosePlayers(int countPlayer){

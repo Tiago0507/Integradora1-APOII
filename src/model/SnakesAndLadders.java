@@ -40,18 +40,27 @@ public class SnakesAndLadders {
             currentPlayer = currentPlayer.getNext();
             return msj;
         }
-        movePlayerOnBoard(newPlayerPos);
+        msj += movePlayerOnBoard(newPlayerPos);
         return msj;
     }
 
-    private void movePlayerOnBoard(int newPlayerPos){
+    private String movePlayerOnBoard(int newPlayerPos){
+        String msj = "";
         Box currentPlayerBox = getBoxByNumber(currentPlayer.getPlayer().getPosition());
         Box newPlayerBox = getBoxByNumber(newPlayerPos);
+        if(newPlayerBox.getHeadLadder() != null){
+            newPlayerBox = newPlayerBox.getHeadLadder();
+            msj = "\nHas caido en una escalera, ahora estás en la casilla numero " + newPlayerBox.getNumber();
+        } else if(newPlayerBox.getTailSnake() != null){
+            newPlayerBox = newPlayerBox.getTailSnake();
+            msj = "\nHas caido en una serpiente, ahora estás en la casilla numero " + newPlayerBox.getNumber();
+        }
         LinkedListPlayerNode playerOnBox = currentPlayerBox.getPlayersList().searchPlayerByName(getCurrentPlayerName());
         currentPlayerBox.getPlayersList().delete(getCurrentPlayerName());
         newPlayerBox.getPlayersList().add(playerOnBox);
         currentPlayer.getPlayer().setPosition(newPlayerPos);
         currentPlayer = currentPlayer.getNext();
+        return msj;
     }
 
     private Box getBoxByNumber(int number){

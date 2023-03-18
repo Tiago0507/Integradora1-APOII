@@ -101,7 +101,7 @@ public class Board {
     private void fillSnakes(int snakes, int counter) {
       if (counter >= snakes)
         return;
-      int posHead = random.nextInt(2, this.size);
+      int posHead = random.nextInt(3, this.size);
       Box headBox = getBoxByNumber(posHead);
       if (headBox.getIsSnake() || headBox.getIsLadder()) {
         fillSnakes(snakes, counter);
