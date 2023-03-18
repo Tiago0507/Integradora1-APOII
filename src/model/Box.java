@@ -30,7 +30,11 @@ public class Box {
         }
         
         //String players = getStringPlayers(playersList.getHead());
-        return "[" + this.number + ((list != "")?" ":"") + list + " " + this.identifier  +"]";
+        return "[" + this.number + ((list != "")?" ":"") + list +"]";
+    }
+
+    public String toStringSnakesAndLadders(){
+        return "[" +((isSnake)? (char)identifier:((isLadder)? identifier: " " )) + "]";
     }
 
     public int getNumber() {

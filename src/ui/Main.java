@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         
 		Main main = new Main(); 
-        //main.cleanConsole();
+        main.cleanConsole();
 		int option = 0; 
         
         main.menuController(-1);
@@ -30,11 +30,11 @@ public class Main {
         if(option != 0){
             game = new SnakesAndLadders();
             option = getOptionShowMenu(); 
-            //cleanConsole();
+            cleanConsole();
 			executeOption(option);
             reader.nextLine();
             reader.nextLine();
-            //cleanConsole();
+            cleanConsole();
             menuController(option);
         }
         return;
@@ -57,7 +57,7 @@ public class Main {
                 uiInitializeBoard();
                 uiChoosePlayers(1);
                 game.initTimer();
-                play();
+                play(0);
                 break;
             case 0: 
                 
@@ -103,12 +103,13 @@ public class Main {
         int maxSnakesAndLadders = rows * columns/3;
         do {
             System.out.println("Input the snakes and ladders (The sum of the quantity must not exceed " + maxSnakesAndLadders +  ")");
+            System.out.println("Also there's a limit of max 26 snakes.");
             System.out.print("Snakes: ");
             snakes = reader.nextInt();
             System.out.print("Ladders: ");
             ladders = reader.nextInt();
-            if(snakes + ladders > maxSnakesAndLadders) System.out.println("Too much snakes and ladders, please try again.");
-        } while (snakes + ladders > maxSnakesAndLadders);
+            if(snakes + ladders > maxSnakesAndLadders || snakes > 26) System.out.println("Too much snakes and/or ladders, please try again.");
+        } while (snakes + ladders > maxSnakesAndLadders || snakes > 26);
         game.initializeBoard(rows, columns, snakes ,ladders);
     }
 
@@ -125,8 +126,8 @@ public class Main {
         }
     }
 
-    public void play(){
-        game.getBoard().print();
+    public void play(int previousOption){
+        if (previousOption != 2) game.getBoard().print();
         uiShowPlayerOptions();
         int option = validateIntegerInput();
         System.out.println(game.play(option));
@@ -135,7 +136,7 @@ public class Main {
             System.out.println("Tu puntaje a sido: " + score);
             return;
         }
-        play();
+        play(option);
     }
 
     public void uiShowPlayerOptions(){

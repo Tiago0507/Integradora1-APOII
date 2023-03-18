@@ -18,7 +18,6 @@ public class Board {
         this.columns = columns;
         initBoard(rows, columns);
         fillSnakesAndLadders(snakes, ladders);
-        printSnakesAndLadders();
     }
     
     //Method to initialize the board, is called from the constructor
@@ -146,16 +145,55 @@ public class Board {
 
     //Print snakes and ladders
 
-    public void printSnakesAndLadders() {
-      for (int i = 0; i < this.size; i++) {
+    public void printSnakesAndLadders(){
+      if(head == null){
+          System.out.println("Lista vacia");
+      }else{
+          if(this.rows%2==0){
+              printSnakesAndLadders(tail,2);
+          }else{
+              printSnakesAndLadders(tail,1);
+          }
+          
+      }
+  }
 
-        if (getBoxByNumber(i) != null) {
-          if (getBoxByNumber(i).getIsLadder() || getBoxByNumber(i).getIsSnake()) {
-          System.out.println("Ladder or snake: id: " + getBoxByNumber(i).getIdentifier() + " on box n " + i);
-        }
-        }
+  private void printSnakesAndLadders(Box current, int row){
+      int rows = this.rows;
+      if(this.rows%2==0){
+          rows+=1;
+      }
+      if(row > rows){
+         return;
+      }else{
+          Box newCurrent = printRowSnakesAndLadders(current, row, 1);
+          System.out.println("");
+          printSnakesAndLadders(newCurrent, row+=1);
+      }
+
+  }
+
+  private Box printRowSnakesAndLadders(Box current, int row, int column) {
+    Box boxito;
+    if (column > this.columns - 1) {
+      System.out.print(current.toStringSnakesAndLadders());
+      return current.getPrevious();
+
+    } else {
+      if (row % 2 == 0) {
+        //Pair
+        System.out.print(current.toStringSnakesAndLadders());
+        boxito = printRowSnakesAndLadders(current.getPrevious(), row, column += 1);
+
+      } else {
+        //Odd
+
+        boxito = printRowSnakesAndLadders(current.getPrevious(), row, column += 1);
+        System.out.print(current.toStringSnakesAndLadders());
       }
     }
+    return boxito;
+  }
     //Get box by number
 
     public Box getBoxByNumber(int number){
