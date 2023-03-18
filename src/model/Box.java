@@ -2,13 +2,14 @@ package model;
 
 public class Box {
 
-    private int number;
+  private int number;
     private Box next;
     private Box previous;
     private Box tailSnake;
     private Box headLadder;
-    private String identifier;
-    private int itemClassifier; // 0 - nothing | 1 - snake | 2-Ladder
+    private boolean isSnake = false;
+    private boolean isLadder = false;
+    private int identifier;
 
     private PlayersList playersList;
 
@@ -23,13 +24,13 @@ public class Box {
 
     public String toString()
     {
-        String list = ""; 
+        String list = "";
         if(playersList != null && playersList.getHead() != null){
             list = playersList.print(playersList.getHead());
         }
         
         //String players = getStringPlayers(playersList.getHead());
-        return "[" + this.number + ((list != "")?" ":"") + list + "]";
+        return "[" + this.number + ((list != "")?" ":"") + list + " " + this.identifier  +"]";
     }
 
     public int getNumber() {
@@ -72,11 +73,11 @@ public class Box {
         this.headLadder = headLadder;
     }
 
-    public String getIdentifier() {
+    public int getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
 
@@ -93,6 +94,27 @@ public class Box {
     }
 
     public void setPlayersList(PlayersList playersList) {
-        this.playersList = playersList;
+      this.playersList = playersList;
     }
+
+
+    public boolean getIsSnake() {
+      return isSnake;
+    }
+
+
+    public void setIsSnake(boolean isSnake) {
+      this.isSnake = isSnake;
+    }
+
+
+    public boolean getIsLadder() {
+      return isLadder;
+    }
+
+
+    public void setIsLadder(boolean isLadder) {
+      this.isLadder = isLadder;
+    }
+    
 }

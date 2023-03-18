@@ -67,8 +67,8 @@ public class SnakesAndLadders {
         return name;
     }
 
-    public void initializeBoard(int rows, int columns){
-            this.board = new Board(rows, columns);
+    public void initializeBoard(int rows, int columns, int snakes, int ladders){
+            this.board = new Board(rows, columns, snakes, ladders);
     }
 
     public Board getBoard(){

@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         
 		Main main = new Main(); 
-        main.cleanConsole();
+        //main.cleanConsole();
 		int option = 0; 
         
         main.menuController(-1);
@@ -30,11 +30,11 @@ public class Main {
         if(option != 0){
             game = new SnakesAndLadders();
             option = getOptionShowMenu(); 
-            cleanConsole();
+            //cleanConsole();
 			executeOption(option);
             reader.nextLine();
             reader.nextLine();
-            cleanConsole();
+            //cleanConsole();
             menuController(option);
         }
         return;
@@ -92,7 +92,7 @@ public class Main {
         int rows = reader.nextInt();
         System.out.print("Columns: ");
         int columns = reader.nextInt();
-        game.initializeBoard(rows, columns);
+        game.initializeBoard(rows, columns, 5 ,5);
     }
 
     public void uiChoosePlayers(int countPlayer){
