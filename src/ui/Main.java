@@ -17,9 +17,7 @@ public class Main {
     public static void main(String[] args) {
         
 		Main main = new Main(); 
-        main.cleanConsole();
-		int option = 0; 
-        
+        main.cleanConsole();        
         main.menuController(-1);
 
 		main.getReader().close();
