@@ -11,11 +11,14 @@ public class PointTree {
 
     //Binary search tree methods
 
-    public void add(TreePlayerNode player){
+    public void addScoreToTree(double score, String name){
+        Player player = new Player(name);
+        player.setScore(score);
+        TreePlayerNode playerNode = new TreePlayerNode(player);
         if(root == null){
-            root = player;
+            root = playerNode;
         }else{
-            add(root, player);
+            add(root, playerNode);
         }
     }
     private void add(TreePlayerNode current, TreePlayerNode player){
@@ -40,18 +43,16 @@ public class PointTree {
     }
 
     //In order from highest to lowest
-    public String inOrder(){
-        return inOrder(root);
+    public void inOrderTop5(){
+        inOrderTop5(root, 0);
     }
-    private String inOrder(TreePlayerNode current){
-        String msj = "";
-        if(current == null){
-            return msj;
-        }
-        msj += inOrder(current.getRight());
-        msj += ("Nombre: " + current.getPlayer().getName() + ", Puntaje: " + current.getPlayer().getScore() + "\n");
-        msj += inOrder(current.getLeft());
-        return msj;
+    private int inOrderTop5(TreePlayerNode current, int counter){
+        if(current == null) return counter;
+        counter = inOrderTop5(current.getRight(), counter+1);
+        if(counter >= 5) return counter;
+        System.out.println("Nombre: " + current.getPlayer().getName() + ", Puntaje: " + current.getPlayer().getScore() + "\n");
+        counter = inOrderTop5(current.getLeft(), counter + 1);
+        return counter;
     }
 
     

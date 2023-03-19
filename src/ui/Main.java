@@ -1,22 +1,24 @@
 package ui;
 import java.util.Scanner;
 
-
 import model.LinkedListPlayerNode;
 import model.Player;
 import model.PlayersList;
+import model.PointTree;
 import model.SnakesAndLadders;
 
 public class Main {
     private Scanner reader;
     private SnakesAndLadders game;
+    private PointTree pointTree;
 
     public Main() {
         reader = new Scanner(System.in);
+        pointTree = new PointTree();
 	}
     public static void main(String[] args) {
         
-		Main main = new Main(); 
+		Main main = new Main();
         main.cleanConsole();        
         main.menuController(-1);
 
@@ -28,12 +30,16 @@ public class Main {
         if(option != 0){
             game = new SnakesAndLadders();
             option = getOptionShowMenu(); 
-            cleanConsole();
+            if (option != 2) cleanConsole();
 			executeOption(option);
-            reader.nextLine();
-            reader.nextLine();
-            cleanConsole();
+            try {
+                Thread.sleep(1000);
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+              }
+            if (option != 2) cleanConsole();
             menuController(option);
+            
         }
         return;
     }
@@ -43,6 +49,7 @@ public class Main {
         System.out.println("<<<<< Snakes And Ladders >>>>>");
         System.out.println(
                 "1. Jugar\n" +
+                "2. Ver top 5 de puntajes\n" +
                 "0. Exit. ");
         option =  validateIntegerInput();
         return option; 
@@ -50,6 +57,9 @@ public class Main {
 
     public void executeOption(int option){;
         switch(option) {
+            case 2:
+                uiShowTop5Score();
+                break;
             case 1 :
                 game.setPlayerList(new PlayersList());
                 uiInitializeBoard();
@@ -74,14 +84,12 @@ public class Main {
         int option = 0; 
 
         if(reader.hasNextInt()){
-            option = reader.nextInt(); 
+            option = reader.nextInt();
         }
         else{
-            // clear reader. 
             reader.nextLine(); 
             option = -1; 
         }
-
         return option; 
     }
 
@@ -131,7 +139,7 @@ public class Main {
         System.out.println(game.play(option));
         if(game.getFinishGame()){
             float score = (600 - game.getTimer()) / 6;
-            System.out.println("Tu puntaje a sido: " + score);
+            uiSetPlayerScoreOnBoard(score);
             return;
         }
         play(option);
@@ -141,6 +149,18 @@ public class Main {
         System.out.println("Jugador " + game.getCurrentPlayerName() + ", es tu turno.");
         System.out.println("1. Tirar dado");
         System.out.println("2. Ver escaleras y serpientes");
+    }
+
+    public void uiSetPlayerScoreOnBoard(double score){
+        System.out.println("Tu puntaje a sido: " + score);
+        System.out.println("Ingresa el nombre que deseas que se guarde en la lista de puntajes");
+        reader.nextLine();
+        String name = reader.nextLine();
+        pointTree.addScoreToTree(score, name);
+    }
+
+    public void uiShowTop5Score(){
+        pointTree.inOrderTop5();
     }
 
     public void cleanConsole(){
