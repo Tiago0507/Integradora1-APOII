@@ -93,6 +93,10 @@ public class SnakesAndLadders {
         board.getHead().getPlayersList().add(boxPlayer);
     }
 
+    public boolean checkIfPlayerExists(String name){
+        return playerList.checkIfPlayerExists(name);
+    }
+
     public PlayersList getPlayerList() {
         return playerList;
     }

@@ -29,6 +29,21 @@ public class PlayersList{
         }
     }
 
+    public boolean checkIfPlayerExists(String name){
+        if(head == null){
+            return false;
+        }
+        if(head.getPlayer().getName().equals(name)) return true;
+        return checkIfPlayerExists(name, head.getNext());
+    }
+
+    private boolean checkIfPlayerExists(String name, LinkedListPlayerNode current){
+        if(current == null) return false;
+        if(current == head) return false;
+        if(current.getPlayer().getName().equals(name)) return true;
+        return checkIfPlayerExists(name, current.getNext());
+    }
+
     public String print(LinkedListPlayerNode player){
         if(player == head.getPrevious()){
             return player.getPlayer().toString();

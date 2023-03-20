@@ -48,7 +48,7 @@ public class PointTree {
     }
     private int inOrderTop5(TreePlayerNode current, int counter){
         if(current == null) return counter;
-        counter = inOrderTop5(current.getRight(), counter+1);
+        counter = inOrderTop5(current.getRight(), counter);
         if(counter >= 5) return counter;
         System.out.println("Nombre: " + current.getPlayer().getName() + ", Puntaje: " + current.getPlayer().getScore() + "\n");
         counter = inOrderTop5(current.getLeft(), counter + 1);

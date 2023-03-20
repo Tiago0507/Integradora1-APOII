@@ -121,10 +121,17 @@ public class Main {
 
     public void uiChoosePlayers(int countPlayer){
         if(countPlayer <= game.NUMBER_OF_PLAYERS) {
-            System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
-            String name = reader.next();
-            LinkedListPlayerNode controllerPlayer = new LinkedListPlayerNode(new Player(name));
-            LinkedListPlayerNode boxPlayer = new LinkedListPlayerNode(new Player(name));
+            boolean playerExists = false;
+            LinkedListPlayerNode controllerPlayer;
+            LinkedListPlayerNode boxPlayer;
+            do {
+                System.out.println("Choose the player " + countPlayer + " : * ! O X % $ # + &");
+                String name = reader.next();
+                controllerPlayer = new LinkedListPlayerNode(new Player(name));
+                boxPlayer = new LinkedListPlayerNode(new Player(name));
+                playerExists = game.getPlayerList().checkIfPlayerExists(name);
+                if(playerExists) System.out.println("A player with this name already exists, choose another.");
+            } while (playerExists);
             game.addPlayer(controllerPlayer, boxPlayer);
             uiChoosePlayers(countPlayer += 1);
         }else{
