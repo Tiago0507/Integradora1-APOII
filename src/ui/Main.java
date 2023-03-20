@@ -96,14 +96,16 @@ public class Main {
     public void uiInitializeBoard(){
         int rows;
         int columns;
+        boolean repeat = false;
         do {
-            System.out.println("Input the rows and columns (Minimum 4 each)");
+            System.out.println("Input the rows and columns (Minimum 4 each, Maximum 20 each)");
             System.out.print("Rows: ");
-            rows = reader.nextInt();
+            rows = validateIntegerInput();
             System.out.print("Columns: ");
-            columns = reader.nextInt();
-            if(rows < 4 || columns < 4) System.out.println("Wrong ammount of columns and/or rows.");
-        } while (rows < 4 || columns < 4);
+            columns = validateIntegerInput();
+            if(rows < 4 || columns < 4 || rows > 20 || columns > 20) repeat = true;
+            if(repeat) System.out.println("Wrong ammount of columns and/or rows.");
+        } while (repeat);
         int snakes;
         int ladders;
         int maxSnakesAndLadders = rows * columns/3;
