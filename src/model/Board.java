@@ -13,7 +13,7 @@ public class Board {
 
     //Constructor
     public Board(int rows, int columns, int snakes, int ladders) {
-      random = new Random();
+      random = new Random(); //Random para elegir el lugar de una escalera o una serpiente dentro del board.
         this.rows = rows;
         this.columns = columns;
         initBoard(rows, columns);
@@ -23,9 +23,9 @@ public class Board {
     //Method to initialize the board, is called from the constructor
     public void initBoard(int rows, int columns){
         this.tail = null;
-        this.head = new Box(1);
-        this.size = rows * columns;
-        initBoard(size, head, 2);
+        this.head = new Box(1); //Se crea a la cabeza del board con el número 1.
+        this.size = rows * columns; //Se halla el tamaño total del board, es decir, la cantidad de boxes que habrá.
+        initBoard(size, head, 2); //Se comienza a crear el resto del tablero desde el número 2.
     }
 
     private void initBoard(int size, Box current, int number){
@@ -34,10 +34,10 @@ public class Board {
         }
 
         Box newBox = new Box(number); //Se crea el nuevo nodo (Box) del board.
-        current.setNext(newBox);
+        current.setNext(newBox); //Se crea la relación entre los nodos.
         newBox.setPrevious(current);
         tail = newBox; //Se pone como tail a la última caja creada.
-        initBoard(size, current.getNext(), number + 1);
+        initBoard(size, current.getNext(), number + 1); //Se hace la recursividad hasta el tamaño del board.
     }
 
     // Print 
@@ -46,10 +46,11 @@ public class Board {
         if(head == null){
             System.out.println("Lista vacia");
         }else{
-            if(this.rows%2==0){
+          if (this.rows % 2 == 0) { //Si la cantidad de filas es par, se llama al método privado que comienza desde 2 para imprimir primero
+              //al actual y después al resto de la fila.
                 print(tail,2);
             }else{
-                print(tail,1);
+                print(tail,1); //Si es impar, se comienza a imprimir desde el que más está a la derecha hasta el current.
             }
             
         }
@@ -77,14 +78,13 @@ public class Board {
         return current.getPrevious();
 
       } else {
-        if (row % 2 == 0) { //Si la fila es par, imprime primero 
+        if (row % 2 == 0) { //Si la fila es par, imprime primero el current y luego el resto de la fila
           //Pair
           System.out.print(current.toString());
           boxito = printRow(current.getPrevious(), row, column += 1);
 
-        } else {
+        } else { //Si la fila es impar, imprime primero al que más está a la izquierda hasta el current que el que está a la derecha
           //Odd
-
           boxito = printRow(current.getPrevious(), row, column += 1);
           System.out.print(current.toString());
         }
