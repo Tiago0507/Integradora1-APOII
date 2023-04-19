@@ -34,7 +34,9 @@ public class Box {
     }
 
     public String toStringSnakesAndLadders(){
-        return "[" +((isSnake)? (char)identifier:((isLadder)? identifier: " " )) + "]";
+      return "[" + ((isSnake) ? (char) identifier : ((isLadder) ? identifier : " ")) + "]";//Pregunta si es una serpiente, si sí lo es
+      //se castea el identificador como char. Si no es una serpiente pero es una escalera, se pone el identificador sin castear. Si no es
+      //ninguno de los dos, solo se pone un espacio.
     }
 
     public int getNumber() {

@@ -29,15 +29,15 @@ public class Board {
     }
 
     private void initBoard(int size, Box current, int number){
-        if(number > size){
+        if(number > size){ //Si el identificador (number) es mayor que el tamaño del board, se sale.
             return;
         }
 
-        Box newBox = new Box(number);
+        Box newBox = new Box(number); //Se crea el nuevo nodo (Box) del board.
         current.setNext(newBox);
         newBox.setPrevious(current);
-        tail = newBox;
-        initBoard(size, current.getNext(),number + 1);
+        tail = newBox; //Se pone como tail a la última caja creada.
+        initBoard(size, current.getNext(), number + 1);
     }
 
     // Print 
@@ -77,7 +77,7 @@ public class Board {
         return current.getPrevious();
 
       } else {
-        if (row % 2 == 0) {
+        if (row % 2 == 0) { //Si la fila es par, imprime primero 
           //Pair
           System.out.print(current.toString());
           boxito = printRow(current.getPrevious(), row, column += 1);
@@ -100,9 +100,10 @@ public class Board {
     private void fillSnakes(int snakes, int counter) {
       if (counter >= snakes)
         return;
-      int posHead = random.nextInt(3, this.size);
-      Box headBox = getBoxByNumber(posHead);
-      if (headBox.getIsSnake() || headBox.getIsLadder()) {
+      int posHead = random.nextInt(3, this.size); //Comienza desde 3 porque al ser cabeza, debe de dejar por lo menos una casilla atrás.
+      //Y ninguna serpiente ni escalera puede empezar en la primera casilla.
+      Box headBox = getBoxByNumber(posHead); //Apunta a la cabeza.
+      if (headBox.getIsSnake() || headBox.getIsLadder()) {//Si esa posición ya es una serpiente o escalera, se hace recursividad.
         fillSnakes(snakes, counter);
         return;
       }
@@ -114,9 +115,9 @@ public class Board {
       }
       headBox.setIsSnake(true);
       tailBox.setIsSnake(true);
-      headBox.setIdentifier(counter + 65);
+      headBox.setIdentifier(counter + 65);//Crea la serpiente a partir del contador y el ASCCI.
       tailBox.setIdentifier(counter + 65);
-      headBox.setTailSnake(tailBox);
+      headBox.setTailSnake(tailBox); //Se hace el link entre la cabeza y la cola de la serpiente.
       fillSnakes(snakes, counter + 1);
     }
     
